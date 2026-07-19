@@ -28,9 +28,9 @@ const upload = multer({storage});
 app.use(cors());
 //app.use(express.json());
 app.post("/Admin",upload.single("file"),async(req,res)=>{
- const img_name=await req.file.originalname
-  const img_header=await req.body.header
- const img_desc=await req.body.desc
+ const img_name= req.file.originalname
+  const img_header= req.body.header
+ const img_desc= req.body.desc
 //console.log(req)
 //console.log(img_name)
 console.log(img_header)
