@@ -120,3 +120,7 @@ font-weight: bold;
     color: #6b4f2c;
     text-align: center;
     width: 100%;}
+
+    .collection_con{
+    display:flex;
+    flex-direction: row;}
