@@ -50,8 +50,8 @@ const sub_con=document.getElementById("sub-con")
 function upload(){
 
 const image=document.getElementById("image").files[0]
-const header=document.getElementById("header").value;
-const desc=document.getElementById("desc").value
+let header=document.getElementById("header").value;
+let desc=document.getElementById("desc").value
 console.log(image)
 if(header==""){
 header="Premium Collection"}
