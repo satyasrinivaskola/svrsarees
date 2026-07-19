@@ -94,7 +94,7 @@ console.log("delete")
 const methods={
 method:"DELETE",
 headers:{"Content-Type":"application/json"}}
-fetch(`http://localhost:3000/Admin/${list.id}`,methods)
+fetch(`https://svrsarees.onrender.com/Admin/${list.id}`,methods)
 .then(res=>res.json())
 .then(data=>console.log(data))
 
