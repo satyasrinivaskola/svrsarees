@@ -1,5 +1,5 @@
 // 🌟 CONFIGURATION: Change this to your live Render URL when you deploy!
-const API_URL = "http://localhost:3000/Admin";
+const API_URL = "https://svrsarees.onrender.com/Admin";
 
 const AdminBtn = document.getElementById("Admin");
 const img_container = document.getElementById("img_container");

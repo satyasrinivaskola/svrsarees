@@ -1,7 +1,7 @@
 console.log("collection_container")
 const img_c=document.getElementById("main_container")
 img_c.innerHTML=`<p id="loading-text">Loading Saree Collection... Please wait.</p>`
-fetch("http://localhost:3000/Admin")
+fetch("https://svrsarees.onrender.com/Admin")
 .then(res=>res.json())
 .then(data=>{
 img_c.innerHTML=""
