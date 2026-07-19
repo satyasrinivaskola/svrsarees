@@ -2,88 +2,71 @@ require("dotenv").config();
 const express = require("express");
 const multer = require("multer");
 const cors = require("cors");
-const fs = require("fs"); // Added to automatically manage directories
-const pool = require("./serever.cjs"); // Ensure this matches your exact file spelling!
-
+const pool = require("./serever.cjs");
 const app = express();
+//multer
 
-// Global Middleware Configuration
-app.use(cors());
-app.use(express.json()); // Uncommented this in case you need to parse JSON requests elsewhere
 
-// 🛠️ FIX: Automatically create the uploads directory on the server if it is missing
-const uploadDir = "./uploads";
-if (!fs.existsSync(uploadDir)) {
-    fs.mkdirSync(uploadDir);
-}
 
-// Multer Storage Configuration
 const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        cb(null, uploadDir);
+
+    destination:function(req,file,cb){
+
+        cb(null,"uploads");
+
     },
-    filename: function (req, file, cb) {
-        cb(null, file.originalname);
+
+    filename:function(req,file,cb){
+
+        cb(null,file.originalname);
+
     }
+
 });
 
-const upload = multer({ storage });
+const upload = multer({storage});
+app.use(cors());
+//app.use(express.json());
+app.post("/Admin",upload.single("file"),async(req,res)=>{
+ const img_name= req.file.originalname
+  const img_header= req.body.header
+ const img_desc= req.body.desc
+//console.log(req)
+//console.log(img_name)
+console.log(img_header)
+console.log(img_desc)
+await pool.execute(`insert into img_details(name,description,header)
+values(?,?,?)`,[img_name,img_desc,img_header])
+ const [rows1] = await pool.execute(
 
-// 📥 Create (Insert Image Details)
-app.post("/Admin", upload.single("file"), async (req, res) => {
-    try {
-        // 🛠️ FIX: Removed 'await' from these plain text variables
-        const img_name = req.file.originalname;
-        const img_header = req.body.header;
-        const img_desc = req.body.desc;
+        "SELECT * FROM img_details",
+    );
+    res.json(rows1);
+  //res.json("inserted");
+})
 
-        console.log("Saving to DB:", { img_name, img_header, img_desc });
-
-        // Insert new entry into MySQL database
-        await pool.execute(
-            `INSERT INTO img_details (name, description, header) VALUES (?, ?, ?)`,
-            [img_name, img_desc, img_header]
-        );
-
-        // Fetch the updated table to send back to the user interface
-        const [rows1] = await pool.execute("SELECT * FROM img_details");
-        res.json(rows1);
-
-    } catch (error) {
-        console.error("Upload Route Failed:", error);
-        res.status(500).json({ error: "Internal Server Error during data processing" });
-    }
-});
-
-// 📤 Read (Fetch All Images)
 app.get("/Admin", async (req, res) => {
-    try {
-        const [rows] = await pool.execute("SELECT * FROM img_details");
-        res.json(rows);
-    } catch (error) {
-        console.error("Fetch Route Failed:", error);
-        res.status(500).json({ error: "Could not fetch image listings" });
-    }
+
+    const [rows] = await pool.execute(
+
+        "SELECT * FROM img_details",
+    );
+    res.json(rows);
+
 });
 
-// 🗑️ Delete (Remove Entry by ID)
-app.delete("/Admin/:id", async (req, res) => {
-    try {
-        const id = req.params.id;
-        console.log("Target Delete ID:", id);
+app.delete("/Admin/:id",async (req, res) => {
+const id=req.params.id;
+console.log(id)
+    const [rows] = await pool.execute(
 
-        await pool.execute(`DELETE FROM img_details WHERE id = ?`, [id]);
-        
-        // 🛠️ FIX: Send back a clean dynamic response array or confirmation string
-        res.json({ message: `Successfully deleted entry with ID ${id}` });
-    } catch (error) {
-        console.error("Delete Route Failed:", error);
-        res.status(500).json({ error: "Could not remove database entry" });
-    }
-});
-
-// Boot the Server
+        `delete from img_details where id=?`,[id]
+    );
+    res.json({row:"row"});})
 const PORT = process.env.PORT || 3000;
+
 app.listen(PORT, () => {
-    console.log(`🚀 API Server running smoothly on port ${PORT}`);
+
+    console.log(`Server Running  ${PORT}`);
+
 });
