@@ -18,7 +18,7 @@ else{
       home_div.style.display="block"
 
 }
-fetch("http://localhost:3000/Admin")
+fetch("https://svrsarees.onrender.com/Admin")
 .then(res=>res.json())
 .then(data=>{
 data.map(list=>{
@@ -61,7 +61,7 @@ const methods={
 method:"POST",
 //headers:{"Content-Type":"application/json"},
 body:form_data}
-fetch("http://localhost:3000/Admin",methods)
+fetch("https://svrsarees.onrender.com/Admin",methods)
 .then(res=>res.json())
 .then(()=>loadimage())
 
@@ -70,7 +70,7 @@ fetch("http://localhost:3000/Admin",methods)
 function loadimage(){
    sub_con.innerHTML = "";
 
-fetch("http://localhost:3000/Admin")
+fetch("https://svrsarees.onrender.com/Admin")
 .then(res=>res.json())
 .then(data=>
 data.map((list)=>{

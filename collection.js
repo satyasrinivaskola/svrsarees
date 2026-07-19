@@ -1,6 +1,6 @@
 console.log("collection_container")
 const img_c=document.getElementById("main_container")
-fetch("http://localhost:3000/Admin")
+fetch("https://svrsarees.onrender.com/Admin")
 .then(res=>res.json())
 .then(data=>
 data.map((list)=>{
