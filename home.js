@@ -55,7 +55,7 @@ let desc=document.getElementById("desc").value
 console.log(image)
 if(header==""){
 header="Premium Collection"}
-else if(desc==""){
+ if(desc==""){
 desc="Premium Designer Saree"
 }
 const form_data=new FormData()
