@@ -53,6 +53,11 @@ const image=document.getElementById("image").files[0]
 const header=document.getElementById("header").value;
 const desc=document.getElementById("desc").value
 console.log(image)
+if(header==""){
+header="Premium Collection"}
+else if(desc==""){
+desc="Premium Designer Saree"
+}
 const form_data=new FormData()
 form_data.append("file",image)
 form_data.append("header",header)
