@@ -1,0 +1,29 @@
+.Admin_login{
+
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+background-color: rgb(131, 89, 33);
+width:450px;
+text-align: center;
+position:relative;
+top:150px;
+left:400px;
+border-radius: 10px;;
+}
+button{
+height: 40px;
+width:50px;
+background-color: burlywood;
+color: brown;
+border-radius: 10px;
+border-style: none;
+}
+a{
+text-decoration: none;
+color: brown;}
+button:hover{
+background-color: rgb(180, 89, 89);}
+body{
+background-color: antiquewhite;}
