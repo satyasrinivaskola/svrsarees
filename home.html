@@ -1,0 +1,31 @@
+<!doctype html>
+<html>
+<head>
+<link rel="stylesheet" href="home.css" />
+
+</head>
+<body>
+ <header>
+        <h1>Sree Venkata Rama Sarees</h1>
+        <nav><a href="home.html">Home</a><a href="about.html">About</a><a href="collections.html">Collections</a><a
+                href="gallery.html">Gallery</a><a href="contact.html">Contact</a>
+                <a onclick="Admin_b()" id="Admin">Admin</a>
+                </nav>
+
+    </header>
+<div id="img_container">
+<h1>Welcome Developer</h1>
+<img src="./uploads/m-1.png" />
+<div id="hide_div" style="display:none;">
+<input type="file" id="image"/>
+<input type="text" placeholder="Header" id="header"/>
+<input type="text" placeholder="Description" id="desc"/>
+<div id="sub-con"></div>
+<button onclick="upload()">upload</button>
+
+</div>
+<div id="home_div"></div>
+</div>
+<script src="home.js"></script>
+</body>
+</html>
