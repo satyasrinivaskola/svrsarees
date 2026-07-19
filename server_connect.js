@@ -8,27 +8,16 @@ const app = express();
 
 
 
-const storage = multer.diskStorage({
+const storage = multer.memoryStorage()
 
-    destination:function(req,file,cb){
-
-        cb(null,"uploads");
-
-    },
-
-    filename:function(req,file,cb){
-
-        cb(null,file.originalname);
-
-    }
-
-});
-
-const upload = multer({storage});
+const upload = multer({ 
+    storage,
+    limits: { fileSize: 10 * 1024 * 1024 } // 10MB file size limit
+})
 app.use(cors());
-//app.use(express.json());
+app.use(express.json({ limit: "50mb" }));
 app.post("/Admin",upload.single("file"),async(req,res)=>{
- const img_name= req.file.originalname
+const base64Image = `data:${req.file.mimetype};base64,${req.file.buffer.toString("base64")}`;
   const img_header= req.body.header
  const img_desc= req.body.desc
 //console.log(req)
@@ -36,7 +25,7 @@ app.post("/Admin",upload.single("file"),async(req,res)=>{
 console.log(img_header)
 console.log(img_desc)
 await pool.execute(`insert into img_details(name,description,header)
-values(?,?,?)`,[img_name,img_desc,img_header])
+values(?,?,?)`,[base64Image,img_desc,img_header])
  const [rows1] = await pool.execute(
 
         "SELECT * FROM img_details",

@@ -9,7 +9,7 @@ const h_e=document.createElement("h1")
 const d_e=document.createElement("p")
 const main_container=document.createElement("div")
 console.log("./uploads/"+list.name)
-i_e.src="./uploads/"+list.name
+i_e.src=list.name
 h_e.textContent=list.header
 d_e.textContent=list.description
 main_container.appendChild(i_e)

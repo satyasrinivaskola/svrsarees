@@ -79,7 +79,7 @@ const h_e=document.createElement("h1")
 const p_e=document.createElement("p")
 const d_e=document.createElement("button")
 console.log("./uploads/"+list.name)
-i_e.src="./uploads/"+list.name
+i_e.src=list.name
 h_e.textContent=list.header
 p_e.textContent=list.description
 d_e.textContent="delete"
